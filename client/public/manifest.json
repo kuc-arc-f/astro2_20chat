@@ -1,6 +1,6 @@
 {
-	"short_name": "astro-15-PWA",
-	"name": "astro-15-PWA-sample",
+	"short_name": "astro20-chat",
+	"name": "astro-20-chat-sample",
 	"display": "standalone",
 	"orientation": "portrait",
 	"start_url": "/",

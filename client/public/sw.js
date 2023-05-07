@@ -1,6 +1,6 @@
 
 // Service Worker のバージョンとキャッシュする App Shell を定義する
-const NAME = 'pwa-astro-app-v15-';
+const NAME = 'pwa-astro-app-v20-';
 const VERSION = '001';
 const CACHE_NAME = NAME + VERSION;
 const urlsToCache = [

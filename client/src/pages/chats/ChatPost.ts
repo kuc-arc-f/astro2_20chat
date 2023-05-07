@@ -97,15 +97,7 @@ console.log(item);
         chatId: chatId,
         userId: userId,
       }
-      const res = await fetch(import.meta.env.PUBLIC_API_URL + '/chat_posts/get_last_time', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json',},
-        body: JSON.stringify(item),
-      });
-      if (res.status != 200) {
-        throw new Error(await res.text());
-      }
-      const json = await res.json();
+      const json = await HttpCommon.server_post(item, "/chat_posts/get_last_time");
       if(json.ret === LibConfig.OK_CODE) {
 //console.log(json.data);
         ret = json.data;

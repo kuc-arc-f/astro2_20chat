@@ -20,6 +20,24 @@ const { title } = Astro.props;
 		integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>		
 		<!-- SQLITE -->
 		<script is:inline src="https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.6.2/sql-wasm.min.js"></script>
+		<!-- PWA -->
+		<link rel="manifest" href="/manifest.json">
+		<!-- Service Worker -->
+		<script is:inline>
+		"use strict";
+		registSW();
+		function registSW() {
+			if ('serviceWorker' in navigator) {
+				window.addEventListener('load', function () {
+					navigator.serviceWorker.register('/sw.js', { scope: './' }).then(function (registration) {
+						console.log('ServiceWorker registration successful with scope: ', registration.scope);
+					}, function (err) {
+						console.log('ServiceWorker registration failed: ', err);
+					});
+				});
+			}
+		}			
+		</script>
 	</head>
 	<body>
 		<!-- Header -->

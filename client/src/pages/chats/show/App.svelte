@@ -114,7 +114,7 @@ const timeoutId = LibTimer.getTimeoutId();
 if(timeoutId !== null) {
   LibTimer.clearTimer(timeoutId);
 }
-//timeout_next();
+timeout_next();
 
 /**
  * sendNotify: 通知APIの起動
