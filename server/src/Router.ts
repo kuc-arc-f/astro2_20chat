@@ -3,6 +3,7 @@ import todoRouter from './routes/todo';
 import userRouter from './routes/user';
 import chatRouter from './routes/chat';
 import chatPostRouter from './routes/chat_post';
+import threadRouter from './routes/thread';
 //
 const Router = {
   /**
@@ -87,7 +88,18 @@ const Router = {
     if (pathname === "/chat_posts/delete") {
       response = await chatPostRouter.delete(req, res, env);  
     }        
-    //delete
+    if (pathname === "/threads/create") {
+      response = await threadRouter.create(req, res, env);  
+    }
+    if (pathname === "/threads/get_list") {
+      response = await threadRouter.get_list(req, res, env);  
+    }
+    if (pathname === "/threads/get") {
+      response = await threadRouter.get(req, res, env);  
+    }
+    if (pathname === "/threads/delete") {
+      response = await threadRouter.delete(req, res, env);  
+    }
     //@ts-ignore
     return response;
   },
