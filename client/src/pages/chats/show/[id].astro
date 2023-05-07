@@ -1,0 +1,30 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import LibCrud from '../../../lib/LibCrud';
+import CrudShow from '../CrudShow';
+import App from './App.svelte';
+
+
+//
+const { id } = Astro.params;
+console.log(id);
+let item: any = await LibCrud.get(Number(id));
+console.log(item);
+---
+
+<!-- -->
+<style>
+</style>
+
+<!-- MarkUp -->
+<Layout title="Welcome to Astro.">
+	<div class="container">
+        <App client:only="svelte" id={id} />
+        <hr />
+    </div>
+</Layout>
+<!-- -->
+<script src="../CrudShow.ts"></script>
+
+<!--
+ -->

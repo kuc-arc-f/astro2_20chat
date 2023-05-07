@@ -1,0 +1,44 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+export type Post = {
+  id: number;
+  name: string;
+};
+//
+---
+
+<Layout title="Welcome to Astro.">
+	<main class="container">
+		<a href={`/`}>[ Back ]</a>
+		<hr />		
+		<h1>User-Create</h1>
+		<p class="instructions">
+		</p>
+		<hr />
+		<div class="col-sm-6">
+			<div>
+			<label>Name:
+			</label>
+			<input type="text" class="form-control" name="name" id="name" />
+			<label>Email:
+			</label>
+			<input type="text" class="form-control" name="email" id="email" />
+			<br />
+			<label>Password:
+			</label>
+			<input type="password" class="form-control" name="password" id="password" />				
+			<button id="btn_save" class="btn btn-primary">Save
+			</button>
+		</div>	
+	</main>
+</Layout>
+<!-- -->
+<style>
+</style>
+<!-- -->
+<script src="./CrudCreate.ts"></script>
+
+<!--
+<button id="btn_save" class="btn btn-primary">Save</button>
+ -->
