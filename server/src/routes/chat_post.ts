@@ -139,6 +139,42 @@ console.log(sql);
   * @param
   *
   * @return
+  */
+  get_last_time: async function (req: any, res: any, env: any): Promise<Response>
+  {
+//    console.log(req);
+    let item = {};
+    let result: any = {}; 
+    const retObj = {ret: "NG", data: [], message: ''}
+    try{
+      if (req) {
+        const sql = `
+        SELECT "ChatPost".id
+        , "ChatPost"."createdAt"
+        FROM ChatPost
+        WHERE chatId = ${req.chatId}
+        ORDER BY id DESC LIMIT 1
+        `;   
+//console.log(sql);   
+        result = await env.DB.prepare(sql).all();
+//console.log(result.results);
+        if(result.results.length < 1) {
+          console.error("Error, results.length < 1");
+          throw new Error('Error , get_last_time');
+        }
+        item = result.results[0];
+      }      
+      return Response.json({ret: "OK", data: item});
+    } catch (e) {
+      console.error(e);
+      return Response.json(retObj);
+    } 
+  },  
+  /**
+  *
+  * @param
+  *
+  * @return
   */ 
   get_list: async function (req: any, res: any, env: any): Promise<Response>
   {

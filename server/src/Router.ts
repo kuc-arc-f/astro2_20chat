@@ -88,6 +88,9 @@ const Router = {
     if (pathname === "/chat_posts/delete") {
       response = await chatPostRouter.delete(req, res, env);  
     }        
+    if (pathname === "/chat_posts/get_last_time") {
+      response = await chatPostRouter.get_last_time(req, res, env);  
+    }        
     if (pathname === "/threads/create") {
       response = await threadRouter.create(req, res, env);  
     }
