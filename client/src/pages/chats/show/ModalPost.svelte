@@ -10,6 +10,7 @@ import LibConfig from '../../../lib/LibConfig';
 import LibCommon from '../../../lib/LibCommon';
 import LibThread from '../../../lib/LibThread';
 import ChatPost from '../ChatPost';
+import Thread from '../Thread';
 //
 export let userId: number = 0, post_id: number, post_body: string = "", 
 postUserName: string = "", dateStr: string = "", postUserId: number,
@@ -42,7 +43,7 @@ console.log("postUserId=", postUserId);
       chatId = item.chatId;
       dateStr = LibCommon.converDatetimeString(item.createdAt);
       //Thread
-//      await getThread();
+      await getThread();
     }
   } catch (e) {
     console.error(e);
@@ -58,7 +59,7 @@ loadProc();
 const getThread = async function () : Promise<void>
 {
   try {
-    threadItems = await LibThread.getItems(post_id);
+    threadItems = await Thread.getItems(post_id);
 console.log(threadItems);    
   } catch (e) {
     console.error(e);
@@ -76,9 +77,8 @@ const createReply = async function () : Promise<void>
   try {
     const body = document.querySelector<HTMLInputElement>('#modal_reply_body');
     const bodyString = body?.value; 
-    await LibThread.create(post_id, bodyString, chatId, postUserId);
+    await Thread.create(post_id, bodyString, chatId, postUserId);
     await getThread();
-//console.log(bodyString);
     //@ts-ignore
     body.value = "";
   } catch (e) {
@@ -128,7 +128,6 @@ console.log(post_id);
         ID: {post_id}
         <!-- replay_box -->
         <hr class="my-1" />
-        <!--
         <div class="row">
           <div class="col-sm-9"><textarea class="form-control" id="modal_reply_body" rows={3} />
           </div>
@@ -137,12 +136,13 @@ console.log(post_id);
               Reply</button>
           </div>
         </div>  
+        <!--
         -->
         <!-- thread --> 
         {#each threadItems as item}
         <div>
           <div class="thread_user_name">
-            <span class="fs-5">{item.UserName}: </span>{item.createdAt}
+            <span class="fs-5">{item.user_name}: </span>{item.createdAt}
           </div>
           
           <p>{@html LibCommon.replaceBrString(item.body)}</p>
