@@ -1,0 +1,7 @@
+name = "d1-project7chat"
+main = "src/index.ts"
+compatibility_date = "2023-05-05"
+
+[vars]
+API_KEY = "hoge123"
+
