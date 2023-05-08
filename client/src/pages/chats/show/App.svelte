@@ -1,6 +1,6 @@
 <script lang="ts">
 import LibConfig from '../../../lib/LibConfig';
-import LibAuth from '../../../lib/LibAuth';
+//import LibAuth from '../../../lib/LibAuth';
 import LibCommon from '../../../lib/LibCommon';
 import LibChatPost from '../../../lib/LibChatPost';
 import LibTimer from '../../../lib/LibTimer';
@@ -105,9 +105,9 @@ console.log(chat_posts);
 }
 startProc();
 if(typeof window !== 'undefined' ) {
-//    const key = LibConfig.COOKIE_KEY_LAST_CHAT;
+    const key = LibConfig.COOKIE_KEY_LAST_CHAT;
 //console.log("#init proc", key);
-//    LibCookie.set_cookie(key, String(id));
+    LibCookie.set_cookie(key, String(id));
 }
 LibNotify.validNotification();
 const timeoutId = LibTimer.getTimeoutId();
