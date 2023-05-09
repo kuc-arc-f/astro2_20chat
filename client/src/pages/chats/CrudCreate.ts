@@ -46,7 +46,7 @@ console.log(json);
         const result = await this.addItem();
         console.log("result=", result);
         if(result === true) {
-          window.location.href = '/gpt';
+          window.location.href = '/chats';
         }
       }); 
     } catch (e) {

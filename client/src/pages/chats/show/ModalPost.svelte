@@ -87,6 +87,24 @@ const createReply = async function () : Promise<void>
   }
 }
 /**
+* createReply :
+* @param
+*
+* @return Promise<void>
+*/
+const deleteThread = async function (id: number) : Promise<void>
+{
+  try {
+console.log("deleteThread=", id);
+    const result = await Thread.delete(id);
+//console.log(result);
+    await getThread();
+  } catch (e) {
+    console.error(e);
+    alert("Error, deleteThread");
+  }
+}
+/**
 * childDeleteItem :
 * @param
 *
@@ -143,8 +161,11 @@ console.log(post_id);
         <div>
           <div class="thread_user_name">
             <span class="fs-5">{item.user_name}: </span>{item.createdAt}
+            <button class="mt-2 btn btn-sm btn-outline-secondary mx-2"
+            on:click={() => deleteThread(item.thread_id)} >
+              <i class="bi bi-trash-fill"></i>
+            </button>
           </div>
-          
           <p>{@html LibCommon.replaceBrString(item.body)}</p>
           <hr class="my-1" />
         </div>
@@ -163,5 +184,5 @@ console.log(post_id);
 </div>
 
 <!-- 
-{item.body}
+<p>[delete]</p>
 -->

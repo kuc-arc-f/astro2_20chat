@@ -18,15 +18,10 @@ const Crud = {
       
       const content = (<HTMLInputElement>document.querySelector("#content")).value;
       data.content = content;
+          
+      //const completed = (<HTMLInputElement>document.querySelector("#completed")).checked;
+      //data.completed = completed ? 1 : 0;
       
-//      const priority = (<HTMLInputElement>document.querySelector("#priority")).value;
-//      data.priority = parseInt(priority);
-    
-      const completed = (<HTMLInputElement>document.querySelector("#completed")).checked;
-      data.completed = completed ? 1 : 0;
-      
-
-    
       return data;
     } catch (e) {
       console.error(e);

@@ -26,12 +26,6 @@ console.log(json);
    }
   },
   /**
-  * 
-  * @param
-  *
-  * @return
-  */
-  /**
   * create
   * @param chatPostId: number
   *
@@ -56,6 +50,26 @@ console.log(json);
       throw new Error('Error, create');
     }
    },  
-  //create
+  /**
+  *
+  * @param id: number
+  *
+  * @return
+  */
+  delete: async function (id: number): Promise<any>
+   {
+    try{
+      let ret = false;
+      const item = {
+        id: id
+      }
+      const json = await HttpCommon.server_post(item, "/threads/delete");
+      console.log(json);
+      return ret;
+    } catch (e) {
+      console.error(e);
+      throw new Error('Error, delete');
+    }
+   },   
 }
 export default Thread;

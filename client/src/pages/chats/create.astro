@@ -13,7 +13,7 @@ console.log(items);
 
 <Layout title="Welcome to Astro.">
 	<main class="container">
-		<a href={`/gpt`}>[ Back ]</a>
+		<a href={`/chats`}>[ Back ]</a>
 		<hr />		
 		<h1>Create</h1>
 		<p class="instructions">
@@ -21,18 +21,13 @@ console.log(items);
 		<hr />
 		<div class="col-sm-6">
 			<div>
-			<label for="name">name</label>
-			<input type="text" id="name" name="name" required>
+				<label for="name">name</label>
+				<input type="text" id="name" name="name" required>
 			</div>
 			<div>
-			<label for="content">内容</label>
-			<textarea id="content" name="content" required></textarea>
+				<label for="content">内容</label>
+				<textarea id="content" name="content" required></textarea>
 			</div>
-			<div>
-			<label for="completed">完了フラグ</label>
-			<input type="checkbox" id="completed" name="completed" value="1">
-			</div>
-
 			<hr />
 			<button id="btn_save" class="btn btn-primary">Save
 			</button>
@@ -46,4 +41,8 @@ console.log(items);
 <script src="./CrudCreate.ts"></script>
 
 <!--
+<div>
+<label for="completed">完了フラグ</label>
+<input type="checkbox" id="completed" name="completed" value="1">
+</div>
  -->
