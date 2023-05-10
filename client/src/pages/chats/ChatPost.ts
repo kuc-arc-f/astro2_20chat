@@ -6,6 +6,29 @@ import HttpCommon from '../../lib/HttpCommon';
 //
 const ChatPost = {
   /**
+  *
+  * @param
+  *
+  * @return
+  */
+  search: async function(chatId: number, searchKey: string): Promise<any>
+  {
+    try {
+        let items = [];
+        const item = {
+          chatId: chatId,
+          seachKey : searchKey,
+        }
+        const json = await HttpCommon.server_post(item, "/chat_posts/search");
+        items = json.data
+// /console.log(items);	      
+        await LibDbSession.set(LibConfig.SESSION_KEY_CHAT_POST, items);
+      return items;
+    } catch (e) {
+      console.error(e);
+    }
+  },   
+  /**
   * addItem
   * @param
   *

@@ -1,6 +1,5 @@
 <script lang="ts">
 import LibConfig from '../../../lib/LibConfig';
-//import LibAuth from '../../../lib/LibAuth';
 import LibCommon from '../../../lib/LibCommon';
 import LibChatPost from '../../../lib/LibChatPost';
 import LibTimer from '../../../lib/LibTimer';
@@ -157,6 +156,7 @@ console.log(result);
         console.error(error);
     }    
 }
+
 /**
  * parentShow
  * @param
@@ -197,6 +197,43 @@ console.log("parentShow=", id)
         console.error(e);
     }    
 }
+/**
+ * clickClear
+ * @param
+ *
+ * @return
+ */
+const clickClear = async function() {
+    try{
+        const searchKey = document.querySelector<HTMLInputElement>('#searchKey');
+        // @ts-ignore
+        searchKey.value = "";
+        const items = await ChatPost.getList(id);
+        chat_posts = items;    
+    } catch (e) {
+        console.error(e);
+        throw new Error('Error , clickClear');
+    }    
+}
+/**
+*
+* @param
+*
+* @return
+*/
+async function clickSearch(){
+    try {
+        const searchKey = document.querySelector<HTMLInputElement>('#searchKey');
+        const skey = searchKey?.value;
+console.log("search:", skey);
+        //@ts-ignore
+        const items = await ChatPost.search(id, skey);
+//console.log(items);
+        chat_posts = items;
+    } catch (error) {
+        console.error(error);
+    }    
+}
 </script>
 <!-- MarkUp -->
 <div class="container my-2">
@@ -212,6 +249,19 @@ console.log("parentShow=", id)
             Post</button>
         </div>
     </div>
+    <hr />
+    <div class="row">
+        <div class="col-md-12 pt-1">
+            <button class="btn btn-sm btn-outline-primary" on:click={() => clickClear()}
+            >Clear</button>
+            <span class="search_key_wrap">
+                <input type="text" size="36" class="mx-2 " name="searchKey"
+                 id="searchKey" placeholder="Search Key">
+            </span>
+            <button class="btn btn-sm btn-outline-primary" on:click={() => clickSearch()}>Search</button>
+        </div>
+    </div>
+    <hr />
     {#each chat_posts as item}
     <div>
         <h5>{item.user_name}</h5>
