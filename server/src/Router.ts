@@ -90,7 +90,11 @@ const Router = {
     }        
     if (pathname === "/chat_posts/get_last_time") {
       response = await chatPostRouter.get_last_time(req, res, env);  
+    }  
+    if (pathname === "/chat_posts/search") {
+      response = await chatPostRouter.search(req, res, env);  
     }        
+    //threads
     if (pathname === "/threads/create") {
       response = await threadRouter.create(req, res, env);  
     }

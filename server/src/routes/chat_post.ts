@@ -211,6 +211,49 @@ console.log(req);
       console.error(e);
       return Response.json(retObj);
     } 
+  },  
+  /**
+  *
+  * @param
+  *
+  * @return
+  */
+  search: async function (req: any, res: any, env: any): Promise<Response>
+  {
+//console.log(req);
+    let resulte: any = [];
+    const retObj = {ret: "NG", data: [], message: ''}
+    try{
+//      let result: any = {};  
+      if (req) {
+        const sql = `
+        SELECT "ChatPost".id
+        ,"ChatPost"."chatId"
+        ,"ChatPost"."userId"
+        ,"ChatPost".title
+        ,"ChatPost".body
+        ,"ChatPost"."createdAt"
+        ,"ChatPost"."updatedAt"
+        ,"User".name as user_name
+        FROM ChatPost
+        LEFT OUTER JOIN "User" ON
+        ("User".id = "ChatPost"."userId")
+        WHERE ChatPost.chatId = ${req.chatId}
+        AND "body" like '%${req.seachKey}%'
+        ORDER BY ChatPost.id DESC        
+        `;  
+        resulte = await env.DB.prepare(sql).all();
+        //console.log(resulte);
+        if(resulte.length < 1) {
+          console.error("Error, results.length < 1");
+          throw new Error('Error , get');
+        }              
+      }           
+      return Response.json({ret: "OK", data: resulte.results});
+    } catch (e) {
+      console.error(e);
+      return Response.json(retObj);
+    } 
   },   
 }
 export default router;
