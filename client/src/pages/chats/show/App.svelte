@@ -6,6 +6,7 @@ import LibTimer from '../../../lib/LibTimer';
 import LibNotify from '../../../lib/LibNotify';
 import LibCookie from '../../../lib/LibCookie';
 import ChatPost from '../ChatPost';
+import Chat from '../Chat';
 import ModalPost from './ModalPost.svelte';
 //
 const postCfg= LibChatPost.get_params()
@@ -17,7 +18,7 @@ const chatParams = {
 }
 
 export let id: number = 0;
-let data: any, chat_posts: any[] = [], DATA = chatParams,
+let data: any, chat_posts: any[] = [], DATA = chatParams, chat: any = {id: 0, name:""},
 post_id = 0, modal_display = false, mTimeoutId: any = 0, user: any = {}, lastCreateTime: string = "";
 console.log("show/App.svelte.id=", id);
 
@@ -75,8 +76,8 @@ console.log("lastCreateTime=", lastCreateTime);
             //beep
             if(items !== null && items.length > 0) {
                 const item: any = items[0];
-//console.log(item.body, item.UserName, item.createdAt);
-                sendNotify(item.UserName, item.body);
+//console.log(item);
+                sendNotify(item.user_name, item.body);
                 setTimeout(async () => {
                     console.log("#sound start");
                     await beepStart();
@@ -97,7 +98,9 @@ console.log("lastCreateTime=", lastCreateTime);
 const startProc= async function() {
     const items = await ChatPost.getList(id);
     chat_posts = items;
-console.log(chat_posts);
+    const chatData = await Chat.get(Number(id));
+    chat = chatData;
+//console.log(chatData);
 //    const userObj: any = await LibAuth.getUser();
 //console.log(userObj);
 //    user = userObj;
@@ -237,7 +240,7 @@ console.log("search:", skey);
 </script>
 <!-- MarkUp -->
 <div class="container my-2">
-    <h1>{id}</h1>
+    <h1>{chat.name}</h1>
     ID: {id}    
     <hr class="my-1" />
     <div class="row">
